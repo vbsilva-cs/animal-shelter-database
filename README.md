@@ -50,7 +50,9 @@ Entidades Principais
 			FROM Pet
 			WHERE data_entrada >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH);
    
-### 1o. Licença: Creative Commons Zero v1.0 Universal
+### 10. Licença
+Este projeto está sob a licença Creative Commons Zero v1.0 Universal (CC0-1.0).
+
 
 
 
