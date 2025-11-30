@@ -138,15 +138,18 @@
 		DELETE FROM armazem_cozinha
 		ORDER BY cod_item desc
 		LIMIT 4;
-
+        
 	-- 6. Deleção dos dados de um Adotante (id_pessoa = 5)
-		DELETE FROM pet_adocao WHERE id_adocao = 1;
-		DELETE FROM adocao WHERE id_adotante = 1;
-		DELETE FROM recibo WHERE id_adotante = 1;
-		DELETE FROM consentimento WHERE id_adotante = 1;
+		DELETE FROM pet_adocao 
+		WHERE id_adocao IN (SELECT id_adocao FROM adocao WHERE id_adotante = 5);
+        
+        DELETE FROM adocao WHERE id_adotante = 5;
+		DELETE FROM recibo WHERE id_adotante = 5;
+		DELETE FROM consentimento WHERE id_adotante = 5;
 		DELETE FROM adotante WHERE id_pessoa = 5;
 		DELETE FROM endereco WHERE id_pessoa = 5;
 		DELETE FROM contato WHERE id_pessoa = 5;
 		DELETE FROM pessoa WHERE id_pessoa = 5;
+
 
 
