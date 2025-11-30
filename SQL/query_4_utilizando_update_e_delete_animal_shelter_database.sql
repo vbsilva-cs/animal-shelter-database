@@ -1,8 +1,8 @@
 -- DEMONSTRANDO ALTERACAO E DELECAO DE DADOS
 
--- UPDATE: Atualizando Dados
+-- 1. UPDATE: Atualizando Dados
 
--- 1. UPDATE PARA REVERTER UMA ADOÇÃO CONCLUÍDA
+-- 1.1. UPDATE PARA REVERTER UMA ADOÇÃO CONCLUÍDA
 	-- Detalhe: É uma situação excepcional, solicitada pelo adotante
 	-- Exemplo: Adotante Elena Star (id = 6) decide reverter a adoção (id = 2) feita de dois pets (ids: 1 e 2)
     
@@ -14,15 +14,24 @@
 -- Passo 2: Atualização(tabela adocao): 'Concluido' -> 'Nao efetivado'
 	UPDATE adocao
 		set status_adocao = 'Nao efetivado'
-        where id_adocao = 6;
+        where id_adocao = 2;
         
--- Caso especial, reversao parcial: adocao de dois pets, na qual apenas um pet é retornado
+-- 1.2. Caso especial, reversao parcial: adocao de dois pets, na qual apenas um pet é retornado
+-- Passo 0: para efeitos da realização desse exemplo e defazer anterações feitas no exemplo anterior, executar:
+    UPDATE pet 
+		set status_pet = 'Adotado'
+		where id_pet = 2;
+	UPDATE adocao
+		set status_adocao = 'Concluido'
+        where id_adocao = 2;
+      
 -- Passo 1: Atualização(tabela pet): 'Adotado' para 'Divulgado' apenas para os pets retornados
 -- Exemplo: retorno do pet de id = 1
     UPDATE pet 
 		set status_pet = 'Divulgado'
-		where id_pet = 1;
-        
+		where id_pet = 1; 
+    
+   
 -- Passo 2: Inserção do novo processo de adoção no sistema (reversao parcial da adocao para 'Nao efetuado')
  -- novo registro de processo
 INSERT INTO processo
@@ -41,7 +50,7 @@ UPDATE pet_adocao
 	WHERE id_pet_adocao = 2;
 
 
--- UPDATE: Controle de estoque
+-- OUTROS EXEMPLOS - UPDATE: Controle de estoque
 
 -- 2. Controle de estoque da área comum (COPA)
 
@@ -128,7 +137,7 @@ DELETE FROM armazem_cozinha where cod_item = 5;
 -- exemplo: Remocao dos quatro ultimos registros da tabela armazen_cozinha
 DELETE FROM armazem_cozinha
 ORDER BY cod_item desc
-LIMIT 5;
+LIMIT 4;
 
 -- 1.3 Deleção de registro em multiplas tabelas
 -- Exemplo: Adotante (id_pessoa = 5) solicita deleção de seus dados
